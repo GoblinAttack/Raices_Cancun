@@ -1,0 +1,7 @@
+{
+  "name": "recopilador-turistico",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
