@@ -10,10 +10,14 @@ import {
   setupIonicReact
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Tab1 from './pages/Tab1';
-import Tab2 from './pages/Tab2';
-import Tab3 from './pages/Tab3';
+import { compassOutline, heartOutline, personOutline } from 'ionicons/icons';
+import { ZonasProvider } from './context/ZonasContext';
+import Inicio from './pages/Inicio';
+import Login from './pages/Login';
+import Explorar from './pages/Explorar';
+import Favoritos from './pages/Favoritos';
+import Perfil from './pages/Perfil';
+import DetalleZona from './pages/DetalleZona';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -47,32 +51,44 @@ import './theme/variables.css';
 
 setupIonicReact();
 
+const Tabs: React.FC = () => (
+  <IonTabs>
+    <IonRouterOutlet>
+      <Route path="explorar" element={<Explorar />} />
+      <Route path="favoritos" element={<Favoritos />} />
+      <Route path="perfil" element={<Perfil />} />
+      <Route index element={<Navigate to="explorar" replace />} />
+    </IonRouterOutlet>
+    <IonTabBar slot="bottom">
+      <IonTabButton tab="explorar" href="/tabs/explorar">
+        <IonIcon aria-hidden="true" icon={compassOutline} />
+        <IonLabel>Explorar</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="favoritos" href="/tabs/favoritos">
+        <IonIcon aria-hidden="true" icon={heartOutline} />
+        <IonLabel>Favoritos</IonLabel>
+      </IonTabButton>
+      <IonTabButton tab="perfil" href="/tabs/perfil">
+        <IonIcon aria-hidden="true" icon={personOutline} />
+        <IonLabel>Perfil</IonLabel>
+      </IonTabButton>
+    </IonTabBar>
+  </IonTabs>
+);
+
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonTabs>
+    <ZonasProvider>
+      <IonReactRouter>
         <IonRouterOutlet>
-          <Route path="/tab1" element={<Tab1 />} />
-          <Route path="/tab2" element={<Tab2 />} />
-          <Route path="/tab3" element={<Tab3 />} />
-          <Route path="/" element={<Navigate to="/tab1" replace />} />
+          <Route path="/inicio" element={<Inicio />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/detalle-zona/:id" element={<DetalleZona />} />
+          <Route path="/tabs/*" element={<Tabs />} />
+          <Route path="/" element={<Navigate to="/inicio" replace />} />
         </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon aria-hidden="true" icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon aria-hidden="true" icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
+      </IonReactRouter>
+    </ZonasProvider>
   </IonApp>
 );
 

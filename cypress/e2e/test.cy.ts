@@ -1,6 +1,7 @@
-describe('My First Test', () => {
-  it('Visits the app root url', () => {
+describe('Raíces Cancún', () => {
+  it('Redirige la raíz a /inicio', () => {
     cy.visit('/')
-    cy.contains('ion-content', 'Tab 1 page')
+    cy.url().should('include', '/inicio')
+    cy.contains('ion-title', 'Raíces Cancún')
   })
 })
