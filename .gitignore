@@ -29,3 +29,22 @@ yarn-error.log*
 
 # Optional eslint cache
 .eslintcache
+
+# --- Ignorar compilaciones y dependencias ---
+node_modules/
+dist/
+www/
+
+# --- Ignorar carpetas nativas de Capacitor no utilizadas ---
+/ios/
+capacitor.config.json.tmp
+
+# --- Ignorar configuraciones locales e IDEs ---
+.vscode/
+.idea/
+*.DS_Store
+.env
+.env.local
+
+# --- ARCHIVOS EXCLUSIVOS PARA IA Y LÍDER TÉCNICO (NO SUBIR) ---
+claude_context.md
